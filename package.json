@@ -1,0 +1,29 @@
+{
+  "name": "discord-bot",
+  "version": "1.0.0",
+  "description": "discord bot",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tlsJP/discord-bot.git"
+  },
+  "keywords": [
+    "discord",
+    "bot"
+  ],
+  "author": "john albert",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tlsJP/discord-bot/issues"
+  },
+  "homepage": "https://github.com/tlsJP/discord-bot#readme",
+  "dependencies": {
+    "discord.js": "^11.4.2",
+    "eslint": "^5.13.0",
+    "ffmpeg-binaries": "^4.0.0",
+    "node-opus": "^0.3.1"
+  }
+}
