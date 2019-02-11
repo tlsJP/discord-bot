@@ -1,12 +1,14 @@
+'use strict';
 
+import { Message, GuildMember } from "discord.js";
 
-const WORKING_DIRECTORY = 'd:/dev/projects/discord-echo-bot/'
-soundPlaying = false;
+const WORKING_DIRECTORY = 'd:/dev/projects/discord-bot/'
+var soundPlaying = false;
 
 /**
  * Tells bot to leave any voice channel
  */
-module.exports.leave = function (msg) {
+module.exports.leave = function (msg: Message) {
   if (msg.guild.voiceConnection) {
     msg.reply('Ok bye... :weary:');
     msg.guild.voiceConnection.disconnect();
@@ -21,7 +23,7 @@ module.exports.leave = function (msg) {
  * @param {Member} member - who it should be played for
  * @param {String} filename - name of file
  */
-module.exports.playFile = function (member, filename) {
+module.exports.playFile = function (member: GuildMember, filename: String) {
   if (soundPlaying) {
     return;
   }
@@ -29,7 +31,7 @@ module.exports.playFile = function (member, filename) {
   member.voiceChannel.join()
     .then(c => {
       soundPlaying = true;
-      const dispatcher = c.playFile(WORKING_DIRECTORY + filename + '.mp3');
+      const dispatcher = c.playFile(WORKING_DIRECTORY + filename.toLowerCase + '.mp3');
       dispatcher.on('end', () => {
         soundPlaying = false;
       })
@@ -37,7 +39,7 @@ module.exports.playFile = function (member, filename) {
     .catch(console.log);
 }
 
-module.exports.playSound = function (msg, filename) {
+module.exports.playSound = function (msg: Message, filename: String) {
   if (soundPlaying) {
     msg.reply("im busy right now!");
     return;
@@ -48,10 +50,10 @@ module.exports.playSound = function (msg, filename) {
 /**
  * Joins the voice channel of user
  */
-module.exports.join = function (msg) {
+module.exports.join = function (msg: Message) {
   if (msg.member.voiceChannel) {
     msg.member.voiceChannel.join()
-      .then(connection => {
+      .then(() => {
         msg.reply('Here I am!! :hugging:');
       })
       .catch(console.log);
