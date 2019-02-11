@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "outDir": "./built",
+    "allowJs": true,
+    "target": "es5",
+    "types": [
+      "node"
+    ],
+    "typeRoots": [
+      "node_modules/@types"
+    ]
+  },
+  "files": [
+    "./node_modules/discord.js/typings/index.d.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "parser": "typescript-eslint-parser",
+  "include": [
+    "./src/**/*"
+  ]
+}
