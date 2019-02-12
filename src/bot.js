@@ -6,13 +6,19 @@ console.log('starting!');
 
 var bot = new Discord.Client();
 
+function channelChanged(oldMember, newMember) {
+  return (oldMember && oldMember.voiceChannel && oldMember.voiceChannel.name)
+    && (newMember && newMember.voiceChannel && newMember.voiceChannel.name)
+    && oldMember.voiceChannel.name != newMember.voiceChannel.name;
+}
+
 /**
  * 'Welcome' people who join a voice channel
  */
 bot.on('voiceStateUpdate', (oldMember, newMember) => {
 
   // if there are changes to the member's state that do not include a change in the channel, do nothing
-  if (oldMember.voiceChannel.name == newMember.voiceChannel.name) {
+  if (!channelChanged(oldMember, newMember)) {
     return;
   }
 
