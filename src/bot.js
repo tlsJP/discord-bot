@@ -49,7 +49,7 @@ bot.on('message', msg => {
         break;
 
       case 'play':
-        cmd.playSound(msg, args);
+        cmd.playSound(msg, args.concat().toString());
         break;
 
       case 'join':
