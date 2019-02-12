@@ -2,7 +2,7 @@
 
 import { Message, GuildMember } from "discord.js";
 
-const WORKING_DIRECTORY = 'd:/dev/projects/discord-bot/'
+const WORKING_DIRECTORY = '/'
 var soundPlaying = false;
 
 /**
