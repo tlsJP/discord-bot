@@ -6,7 +6,16 @@ console.log('starting!');
 
 var bot = new Discord.Client();
 
+/**
+ * 'Welcome' people who join a voice channel
+ */
 bot.on('voiceStateUpdate', (oldMember, newMember) => {
+
+  // if there are changes to the member's state that do not include a change in the channel, do nothing
+  if (oldMember.voiceChannel.name == newMember.voiceChannel.name) {
+    return;
+  }
+
   if (newMember.voiceChannel) {
     cmd.playFile(newMember, 'sup');
   }
