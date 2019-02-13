@@ -2,7 +2,7 @@
 
 import { Message, GuildMember } from "discord.js";
 
-const WORKING_DIRECTORY = '/'
+const WORKING_DIRECTORY = '/mp3/'
 var soundPlaying = false;
 
 /**
