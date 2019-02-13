@@ -6,7 +6,22 @@ console.log('starting!');
 
 var bot = new Discord.Client();
 
+function channelChanged(oldMember, newMember) {
+  return (oldMember && oldMember.voiceChannel && oldMember.voiceChannel.name)
+    && (newMember && newMember.voiceChannel && newMember.voiceChannel.name)
+    && oldMember.voiceChannel.name != newMember.voiceChannel.name;
+}
+
+/**
+ * 'Welcome' people who join a voice channel
+ */
 bot.on('voiceStateUpdate', (oldMember, newMember) => {
+
+  // if there are changes to the member's state that do not include a change in the channel, do nothing
+  if (!channelChanged(oldMember, newMember)) {
+    return;
+  }
+
   if (newMember.voiceChannel) {
     cmd.playFile(newMember, 'sup');
   }
@@ -34,13 +49,14 @@ bot.on('message', msg => {
         break;
 
       case 'play':
-        cmd.playSound(msg, args);
+        cmd.playSound(msg, args.concat().toString());
         break;
 
       case 'join':
         cmd.join(msg);
         break;
 
+      case 'stop':
       case 'leave':
         cmd.leave(msg);
         break;

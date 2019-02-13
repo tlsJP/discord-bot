@@ -2,7 +2,7 @@
 
 import { Message, GuildMember } from "discord.js";
 
-const WORKING_DIRECTORY = 'd:/dev/projects/discord-bot/'
+const WORKING_DIRECTORY = '/mp3/'
 var soundPlaying = false;
 
 /**
@@ -31,7 +31,7 @@ module.exports.playFile = function (member: GuildMember, filename: String) {
   member.voiceChannel.join()
     .then(c => {
       soundPlaying = true;
-      const dispatcher = c.playFile(WORKING_DIRECTORY + filename.toLowerCase + '.mp3');
+      const dispatcher = c.playFile(WORKING_DIRECTORY + filename.toLowerCase() + '.mp3');
       dispatcher.on('end', () => {
         soundPlaying = false;
       })
