@@ -1,6 +1,7 @@
 'use strict';
 
 import { Message, GuildMember } from "discord.js";
+import fs = require('fs');
 
 const WORKING_DIRECTORY = '/mp3/'
 var soundPlaying = false;
@@ -37,6 +38,30 @@ module.exports.playFile = function (member: GuildMember, filename: String) {
       })
     })
     .catch(console.log);
+}
+
+module.exports.listSounds = function (msg: Message) {
+  console.log('list files');
+  fs.readdir(WORKING_DIRECTORY, (err, files) => {
+    console.log('read the directory...');
+    console.log(files);
+
+    if (err) {
+      console.log(err);
+      return;
+    }
+
+    let str = "MP3s :\n";
+    let i = 0;
+    files.forEach(f => {
+      if (f.endsWith('.mp3') && i< 50) {
+        str += f.replace('.mp3', '') + '\n';
+        i++;
+      }
+    })
+    console.log(str);
+    msg.reply(str);
+  })
 }
 
 module.exports.playSound = function (msg: Message, filename: String) {

@@ -56,6 +56,10 @@ bot.on('message', msg => {
         cmd.join(msg);
         break;
 
+      case 'list':
+        cmd.listSounds(msg);
+        break;
+
       case 'stop':
       case 'leave':
         cmd.leave(msg);
