@@ -22,7 +22,7 @@ function firstChannel(oldMember, newMember) {
 bot.on('voiceStateUpdate', (oldMember, newMember) => {
 
   //only play welcome if the voice channel changed or if they were not previously in a voice channel
-  if (channelChanged(oldMember, newMember) | firstChannel(oldMember, newMember)) {
+  if (channelChanged(oldMember, newMember) || firstChannel(oldMember, newMember)) {
     cmd.playFile(newMember, 'sup');
   }
 
