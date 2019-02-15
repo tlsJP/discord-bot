@@ -12,19 +12,20 @@ function channelChanged(oldMember, newMember) {
     && oldMember.voiceChannel.name != newMember.voiceChannel.name;
 }
 
+function firstChannel(oldMember, newMember) {
+    return oldMember.voiceChannel==null & newMember.voiceChannel!=null;
+}
+
 /**
  * 'Welcome' people who join a voice channel
  */
 bot.on('voiceStateUpdate', (oldMember, newMember) => {
 
-  // if there are changes to the member's state that do not include a change in the channel, do nothing
-  if (!channelChanged(oldMember, newMember)) {
-    return;
-  }
-
-  if (newMember.voiceChannel) {
+  //only play welcome if the voice channel changed or if they were not previously in a voice channel
+  if (channelChanged(oldMember, newMember) | firstChannel(oldMember, newMember)) {
     cmd.playFile(newMember, 'sup');
   }
+
 });
 
 bot.on('ready', function () {
@@ -54,6 +55,10 @@ bot.on('message', msg => {
 
       case 'join':
         cmd.join(msg);
+        break;
+
+      case 'list':
+        cmd.listSounds(msg);
         break;
 
       case 'stop':
