@@ -48,7 +48,6 @@ bot.on('message', msg => {
     switch (req) {
 
       case 'echo':
-        msg.channel.send(args.join(' '));
         msg.reply(args.join(' '));
         break;
 
