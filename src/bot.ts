@@ -1,25 +1,27 @@
-var Discord = require('discord.js');
-var cmd = require('./commands.js');
-var auth = require('./auth.json');
+'use strict';
+
+import Discord = require('discord.js');
+import * as cmd from './commands.js';
+import * as auth from './auth.json';
 
 console.log('starting!');
 
 var bot = new Discord.Client();
 
-function channelChanged(oldMember, newMember) {
+function channelChanged(oldMember: Discord.GuildMember, newMember: Discord.GuildMember) {
   return (oldMember && oldMember.voiceChannel && oldMember.voiceChannel.name)
     && (newMember && newMember.voiceChannel && newMember.voiceChannel.name)
     && oldMember.voiceChannel.name != newMember.voiceChannel.name;
 }
 
-function firstChannel(oldMember, newMember) {
-    return oldMember.voiceChannel==null & newMember.voiceChannel!=null;
+function firstChannel(oldMember: Discord.GuildMember, newMember: Discord.GuildMember) {
+  return oldMember.voiceChannel == null && newMember.voiceChannel != null;
 }
 
 /**
  * 'Welcome' people who join a voice channel
  */
-bot.on('voiceStateUpdate', (oldMember, newMember) => {
+bot.on('voiceStateUpdate', (oldMember: Discord.GuildMember, newMember: Discord.GuildMember) => {
 
   //only play welcome if the voice channel changed or if they were not previously in a voice channel
   if (channelChanged(oldMember, newMember) || firstChannel(oldMember, newMember)) {
