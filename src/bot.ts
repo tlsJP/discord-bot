@@ -1,4 +1,4 @@
-
+'use strict';
 
 import Discord = require('discord.js');
 import * as cmd from './commands.js';
