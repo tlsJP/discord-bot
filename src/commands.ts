@@ -9,7 +9,7 @@ var soundPlaying = false;
 /**
  * Tells bot to leave any voice channel
  */
-module.exports.leave = function (msg: Message) {
+export function leave(msg: Message) {
   if (msg.guild.voiceConnection) {
     msg.reply('Ok bye... :weary:');
     msg.guild.voiceConnection.disconnect();
@@ -24,7 +24,7 @@ module.exports.leave = function (msg: Message) {
  * @param {Member} member - who it should be played for
  * @param {String} filename - name of file
  */
-module.exports.playFile = function (member: GuildMember, filename: String) {
+export function playFile(member: GuildMember, filename: String) {
   if (soundPlaying) {
     return;
   }
@@ -40,7 +40,7 @@ module.exports.playFile = function (member: GuildMember, filename: String) {
     .catch(console.log);
 }
 
-module.exports.listSounds = function (msg: Message) {
+export function listSounds(msg: Message) {
   console.log('list files');
   fs.readdir(WORKING_DIRECTORY, (err, files) => {
     console.log('read the directory...');
@@ -66,7 +66,7 @@ module.exports.listSounds = function (msg: Message) {
   })
 }
 
-module.exports.playSound = function (msg: Message, filename: String) {
+export function playSound(msg: Message, filename: String) {
   if (soundPlaying) {
     msg.reply("im busy right now!");
     return;
@@ -77,7 +77,7 @@ module.exports.playSound = function (msg: Message, filename: String) {
 /**
  * Joins the voice channel of user
  */
-module.exports.join = function (msg: Message) {
+export function join(msg: Message) {
   if (msg.member.voiceChannel) {
     msg.member.voiceChannel.join()
       .then(() => {
