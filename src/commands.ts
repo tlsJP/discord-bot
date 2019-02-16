@@ -51,11 +51,13 @@ module.exports.listSounds = function (msg: Message) {
       return;
     }
 
-    let str = "MP3s :\n";
+    let str = "\nMP3s\n\n";
+    str += "Usage : !play {sound}\n";
+    str += "\nSounds:\n";
     let i = 0;
     files.forEach(f => {
-      if (f.endsWith('.mp3') && i< 50) {
-        str += f.replace('.mp3', '') + '\n';
+      if (f.endsWith('.mp3') && i < 50) {
+        str += ' ' + f.replace('.mp3', '') + '\n';
         i++;
       }
     })
