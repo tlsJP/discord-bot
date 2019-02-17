@@ -29,6 +29,11 @@ export function playFile(member: GuildMember, filename: String) {
     return;
   }
 
+  if(member==null || member.voiceChannel ==null) {
+    console.log('cant play file for a null member');
+    return;
+  }
+
   member.voiceChannel.join()
     .then(c => {
       soundPlaying = true;
