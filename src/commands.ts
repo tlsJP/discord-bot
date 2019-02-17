@@ -57,7 +57,7 @@ export function listSounds(msg: Message) {
     let i = 0;
     files.forEach(f => {
       if (f.endsWith('.mp3') && i < 50) {
-        str += ' ' + f.replace('.mp3', '') + '\n';
+        str += '  ' + f.replace('.mp3', '') + '\n';
         i++;
       }
     })
