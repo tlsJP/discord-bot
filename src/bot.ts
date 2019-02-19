@@ -4,9 +4,21 @@ import { Client, GuildMember } from 'discord.js';
 import * as cmd from './commands.js';
 import * as auth from './auth.json';
 
-console.log('starting!');
+var bot: Client;
 
-var bot = new Client();
+init();
+
+function init() {
+  let d = new Date();
+  console.log(d + ' : Starting the bot!');
+  bot = new Client();
+}
+
+function destroy() {
+  let d = new Date();
+  console.log(d + ': Destroying the bot...');
+  bot.destroy();
+}
 
 function channelChanged(oldMember: GuildMember, newMember: GuildMember) {
   return (oldMember && oldMember.voiceChannel && oldMember.voiceChannel.name)
@@ -30,9 +42,16 @@ bot.on('voiceStateUpdate', (oldMember: GuildMember, newMember: GuildMember) => {
 
 });
 
-bot.on('ready', function () {
+bot.on('ready', () => {
   console.log('Logged in as %s', bot.user.username);
 });
+
+bot.on('error', (e: Error) => {
+  console.log('Oh no an error!');
+  console.log(e);
+  destroy();
+  init();
+})
 
 bot.on('message', msg => {
 
