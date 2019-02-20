@@ -12,11 +12,12 @@ function init() {
   let d = new Date();
   console.log(d + ' : Starting the bot!');
   bot = new Client();
+  bot.login(auth.token);
 }
 
 function destroy() {
   let d = new Date();
-  console.log(d + ': Destroying the bot...');
+  console.log(d + ' : Destroying the bot...');
   bot.destroy();
 }
 
@@ -47,7 +48,8 @@ bot.on('ready', () => {
 });
 
 bot.on('error', (e: Error) => {
-  console.log('Oh no an error!');
+  let d = new Date();
+  console.log(d.toString() + ' : Oh no an error!');
   console.log(e);
   destroy();
   init();
@@ -61,7 +63,8 @@ bot.on('message', msg => {
     let args = content.substring(1).split(' ');
     let req = args[0];
 
-    console.log(msg.member.user.username + ' - ' + req);
+    let d = new Date();
+    console.log(d.toString() + ' : ' + msg.member.user.username + ' - ' + req);
 
     args.splice(0, 1);
     switch (req) {
@@ -94,5 +97,3 @@ bot.on('message', msg => {
   }
 
 });
-
-bot.login(auth.token);
