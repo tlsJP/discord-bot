@@ -48,8 +48,6 @@ export function playFile(member: GuildMember, filename: String) {
 export function listSounds(msg: Message) {
   console.log('list files');
   fs.readdir(WORKING_DIRECTORY, (err, files) => {
-    console.log('read the directory...');
-    console.log(files);
 
     if (err) {
       console.log(err);
@@ -66,7 +64,7 @@ export function listSounds(msg: Message) {
         i++;
       }
     })
-    console.log(str);
+
     msg.reply(str);
   })
 }
