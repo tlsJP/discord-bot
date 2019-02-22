@@ -52,7 +52,7 @@ bot.on('error', (e: Error) => {
   console.log(d.toString() + ' : Oh no an error!');
   console.log(e);
   destroy();
-  init();
+  process.exit(1);
 })
 
 bot.on('message', msg => {
