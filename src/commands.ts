@@ -4,6 +4,7 @@ import { Message, GuildMember } from "discord.js";
 import fs = require('fs');
 
 const WORKING_DIRECTORY = '/mp3/'
+const RESTRICTED_DIRECTORY = '/restricted/'
 var soundPlaying = false;
 
 /**
@@ -29,7 +30,7 @@ export function playFile(member: GuildMember, filename: String) {
     return;
   }
 
-  if(member==null || member.voiceChannel ==null) {
+  if (member == null || member.voiceChannel == null) {
     console.log('cant play file for a null member');
     return;
   }
@@ -46,27 +47,30 @@ export function playFile(member: GuildMember, filename: String) {
 }
 
 export function listSounds(msg: Message) {
-  console.log('list files');
-  fs.readdir(WORKING_DIRECTORY, (err, files) => {
+  printFolder(msg, WORKING_DIRECTORY);
+  printFolder(msg, RESTRICTED_DIRECTORY);
+}
 
+function printFolder(msg: Message, folderName: string) {
+  console.log('print folder : ' + folderName);
+  fs.readdir(folderName, (err, files) => {
     if (err) {
       console.log(err);
       return;
     }
-
-    let str = "\nMP3s\n\n";
+    let str = "\n" + folderName + "\n\n";
     str += "Usage : !play {sound}\n";
     str += "\nSounds:\n";
     let i = 0;
     files.forEach(f => {
-      if (f.endsWith('.mp3') && i < 50) {
+      if (f.endsWith('.mp3') && i < 5) {
         str += '  ' + f.replace('.mp3', '') + '\n';
         i++;
       }
-    })
-
+    });
     msg.reply(str);
-  })
+  });
+
 }
 
 export function playSound(msg: Message, filename: String) {
