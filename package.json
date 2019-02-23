@@ -23,6 +23,7 @@
   "dependencies": {
     "@types/node": "^10.12.24",
     "discord.js": "^11.4.2",
+    "discord.js-commando": "^0.10.0",
     "eslint": "^5.13.0",
     "ffmpeg-binaries": "^4.0.0",
     "node-opus": "^0.3.1"
