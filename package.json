@@ -25,10 +25,9 @@
     "discord.js": "^11.4.2",
     "discord.js-commando": "^0.10.0",
     "eslint": "^5.13.0",
-    "ffmpeg-binaries": "^4.0.0",
     "node-opus": "^0.3.1"
   },
   "devDependencies": {
-    "typescript-eslint-parser": "^22.0.0"
+    "@typescript-eslint/parser": "^1.4.1"
   }
 }
