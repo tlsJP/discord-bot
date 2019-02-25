@@ -3,6 +3,7 @@
 import { Client, GuildMember } from 'discord.js';
 import * as cmd from './commands.js';
 import * as auth from './auth.json';
+import commando = require('discord.js-commando');
 
 var bot: Client;
 
@@ -11,8 +12,9 @@ init();
 function init() {
   let d = new Date();
   console.log(d + ' : Starting the bot!');
-  bot = new Client();
+  bot = new commando.CommandoClient();
   bot.login(auth.token);
+  
 }
 
 function destroy() {
