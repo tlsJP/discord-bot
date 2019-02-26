@@ -1,11 +1,11 @@
 'use strict';
 
-import { Client, GuildMember } from 'discord.js';
+import {  GuildMember } from 'discord.js';
 import * as cmd from './commands.js';
 import * as auth from './auth.json';
 import commando = require('discord.js-commando');
 
-var bot: Client;
+var bot: commando.CommandoClient;
 
 init();
 
@@ -13,6 +13,12 @@ function init() {
   let d = new Date();
   console.log(d + ' : Starting the bot!');
   bot = new commando.CommandoClient();
+
+  bot.registry
+  .registerGroup('util', 'Utils')
+  .registerDefaults()
+  .registerCommandsIn(__dirname + '/commands');
+
   bot.login(auth.token);
   
 }
@@ -80,7 +86,7 @@ bot.on('message', msg => {
         break;
 
       case 'join':
-        cmd.join(msg);
+      //   cmd.join(msg);
         break;
 
       case 'list':
