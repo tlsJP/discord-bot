@@ -1,9 +1,9 @@
 'use strict';
 
-import {  GuildMember } from 'discord.js';
+import { GuildMember } from 'discord.js';
 import * as cmd from './commands.js';
 import * as auth from './auth.json';
-import commando = require('discord.js-commando');
+import * as commando from 'discord.js-commando';
 
 var bot: commando.CommandoClient;
 
@@ -15,12 +15,12 @@ function init() {
   bot = new commando.CommandoClient();
 
   bot.registry
-  .registerGroup('util', 'Utils')
-  .registerDefaults()
-  .registerCommandsIn(__dirname + '/commands');
+    .registerGroup('util', 'Utils')
+    .registerDefaults()
+    .registerCommandsIn(__dirname + '/commands');
 
   bot.login(auth.token);
-  
+
 }
 
 function destroy() {
@@ -86,7 +86,7 @@ bot.on('message', msg => {
         break;
 
       case 'join':
-      //   cmd.join(msg);
+        //   cmd.join(msg);
         break;
 
       case 'list':

@@ -1,7 +1,7 @@
 'use strict';
 
 import { Message, GuildMember } from "discord.js";
-import fs = require('fs');
+import * as  fs from 'fs';
 
 const WORKING_DIRECTORY = '/mp3/'
 var soundPlaying = false;
@@ -29,7 +29,7 @@ export function playFile(member: GuildMember, filename: String) {
     return;
   }
 
-  if(member==null || member.voiceChannel ==null) {
+  if (member == null || member.voiceChannel == null) {
     console.log('cant play file for a null member');
     return;
   }
