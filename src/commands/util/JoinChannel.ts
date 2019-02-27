@@ -1,3 +1,4 @@
+'use strict';
 import { Command, CommandoClient, CommandMessage } from 'discord.js-commando';
 import { Message } from 'discord.js';
 
@@ -12,9 +13,8 @@ module.exports = class JoinChannel extends Command {
   }
 
   async run(msg: CommandMessage) {
-    console.log('joining?');
 
-    return new Promise<Message>((resolve, reject) => {
+    return new Promise<Message>(() => {
       if (msg.member.voiceChannel) {
         msg.member.voiceChannel.join()
           .then(() => {
