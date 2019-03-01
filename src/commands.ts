@@ -33,30 +33,6 @@ export function playFile(member: GuildMember, filename: String) {
     .catch(console.log);
 }
 
-export function listSounds(msg: Message) {
-  console.log('list files');
-  fs.readdir(WORKING_DIRECTORY, (err, files) => {
-
-    if (err) {
-      console.log(err);
-      return;
-    }
-
-    let str = "\nMP3s\n\n";
-    str += "Usage : !play {sound}\n";
-    str += "\nSounds:\n";
-    let i = 0;
-    files.forEach(f => {
-      if (f.endsWith('.mp3') && i < 50) {
-        str += '  ' + f.replace('.mp3', '') + '\n';
-        i++;
-      }
-    })
-
-    msg.reply(str);
-  })
-}
-
 
 /**
  * Joins the voice channel of user

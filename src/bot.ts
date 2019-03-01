@@ -82,10 +82,6 @@ bot.on('message', msg => {
         msg.reply(args.join(' '));
         break;
 
-      case 'list':
-        cmd.listSounds(msg);
-        break;
-
 
       default:
         // msg.reply(':angry: Unrecognized command!');
