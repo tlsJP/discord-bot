@@ -16,6 +16,7 @@ function init() {
 
   bot.registry
     .registerGroup('util', 'Utils')
+    .registerGroup('music','Music')
     .registerDefaults()
     .registerCommandsIn(__dirname + '/commands');
 
@@ -70,11 +71,11 @@ bot.on('message', msg => {
   if (content.substring(0, 1) == '!') {
     let args = content.substring(1).split(' ');
     let req = args[0];
+    args.splice(0, 1);
 
     let d = new Date();
-    console.log(d.toString() + ' : ' + msg.member.user.username + ' - ' + req);
+    console.log(d.toString() + ' [' + msg.member.user.username + ']: ' + content);
 
-    args.splice(0, 1);
     switch (req) {
 
       case 'echo':
@@ -99,7 +100,7 @@ bot.on('message', msg => {
         break;
 
       default:
-        msg.reply(':angry: Unrecognized command!');
+        // msg.reply(':angry: Unrecognized command!');
 
     }
   }
