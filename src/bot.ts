@@ -83,7 +83,7 @@ bot.on('message', msg => {
         break;
 
       case 'play':
-        cmd.playSound(msg, args.concat().toString());
+        // cmd.playSound(msg, args.concat().toString());
         break;
 
       case 'join':
