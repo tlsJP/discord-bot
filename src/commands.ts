@@ -7,18 +7,6 @@ const WORKING_DIRECTORY = '/mp3/'
 var soundPlaying = false;
 
 /**
- * Tells bot to leave any voice channel
- */
-export function leave(msg: Message) {
-  if (msg.guild.voiceConnection) {
-    msg.reply('Ok bye... :weary:');
-    msg.guild.voiceConnection.disconnect();
-  } else {
-    msg.reply('I\'m not in a voice channel :sob:');
-  }
-}
-
-/**
  * Play an mp3
  *  
  * @param {Member} member - who it should be played for
@@ -69,13 +57,6 @@ export function listSounds(msg: Message) {
   })
 }
 
-export function playSound(msg: Message, filename: String) {
-  if (soundPlaying) {
-    msg.reply("im busy right now!");
-    return;
-  }
-  this.playFile(msg.member, filename);
-}
 
 /**
  * Joins the voice channel of user
