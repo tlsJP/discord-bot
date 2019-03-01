@@ -16,16 +16,21 @@ module.exports = class Play extends Command {
   }
 
   async run(msg: CommandMessage) {
-    console.log(msg.member.nickname + ' : play(' + msg.argString.trim() + ')...');
+    let filename = msg.argString.trim().toLocaleLowerCase();
+    console.log(msg.member.nickname + ' : play(' + filename + ')...');
+
+    if (soundPlaying) {
+      console.log("bot is busy playing something.");
+      msg.reply("im busy right now!");
+      return;
+    }
 
     return new Promise<Message>(() => {
       if (msg.member.voiceChannel) {
-
-        let filename = msg.argString;
-
         msg.member.voiceChannel.join()
           .then(c => {
-            const dispatcher = c.playFile(WORKING_DIRECTORY + filename.toLocaleLowerCase() + '.mp3');
+            soundPlaying = true;
+            const dispatcher = c.playFile(WORKING_DIRECTORY + filename + '.mp3');
             dispatcher.on('end', () => {
               soundPlaying = false;
             })
@@ -33,7 +38,7 @@ module.exports = class Play extends Command {
           .catch(console.log);
 
       } else {
-
+        msg.reply('I don\'t know where to go :cry:');
       }
     });
   }
