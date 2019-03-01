@@ -1,8 +1,8 @@
 'use strict';
 import { Command, CommandoClient, CommandMessage } from 'discord.js-commando';
 import { Message } from 'discord.js';
+import * as repo from './WorkingDirectory.json';
 
-const WORKING_DIRECTORY = '/mp3/'
 var soundPlaying = false;
 
 module.exports = class Play extends Command {
@@ -30,7 +30,7 @@ module.exports = class Play extends Command {
         msg.member.voiceChannel.join()
           .then(c => {
             soundPlaying = true;
-            const dispatcher = c.playFile(WORKING_DIRECTORY + filename + '.mp3');
+            const dispatcher = c.playFile(repo.workingDirectory + filename + '.mp3');
             dispatcher.on('end', () => {
               soundPlaying = false;
             })
