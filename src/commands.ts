@@ -1,22 +1,10 @@
 'use strict';
 
 import { Message, GuildMember } from "discord.js";
-import fs = require('fs');
+import * as  fs from 'fs';
 
 const WORKING_DIRECTORY = '/mp3/'
 var soundPlaying = false;
-
-/**
- * Tells bot to leave any voice channel
- */
-export function leave(msg: Message) {
-  if (msg.guild.voiceConnection) {
-    msg.reply('Ok bye... :weary:');
-    msg.guild.voiceConnection.disconnect();
-  } else {
-    msg.reply('I\'m not in a voice channel :sob:');
-  }
-}
 
 /**
  * Play an mp3
@@ -29,7 +17,7 @@ export function playFile(member: GuildMember, filename: String) {
     return;
   }
 
-  if(member==null || member.voiceChannel ==null) {
+  if (member == null || member.voiceChannel == null) {
     console.log('cant play file for a null member');
     return;
   }
@@ -43,52 +31,4 @@ export function playFile(member: GuildMember, filename: String) {
       })
     })
     .catch(console.log);
-}
-
-export function listSounds(msg: Message) {
-  console.log('list files');
-  fs.readdir(WORKING_DIRECTORY, (err, files) => {
-
-    if (err) {
-      console.log(err);
-      return;
-    }
-
-    let str = "\nMP3s\n\n";
-    str += "Usage : !play {sound}\n";
-    str += "\nSounds:\n";
-    let i = 0;
-    files.forEach(f => {
-      if (f.endsWith('.mp3') && i < 50) {
-        str += '  ' + f.replace('.mp3', '') + '\n';
-        i++;
-      }
-    })
-
-    msg.reply(str);
-  })
-}
-
-export function playSound(msg: Message, filename: String) {
-  if (soundPlaying) {
-    msg.reply("im busy right now!");
-    return;
-  }
-  this.playFile(msg.member, filename);
-}
-
-/**
- * Joins the voice channel of user
- */
-export function join(msg: Message) {
-  if (msg.member.voiceChannel) {
-    msg.member.voiceChannel.join()
-      .then(() => {
-        msg.reply('Here I am!! :hugging:');
-      })
-      .catch(console.log);
-
-  } else {
-    msg.reply('I don\'t know where to go :cry:');
-  }
 }

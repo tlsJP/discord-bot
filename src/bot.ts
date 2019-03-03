@@ -1,18 +1,27 @@
 'use strict';
 
-import { Client, GuildMember } from 'discord.js';
+import { GuildMember } from 'discord.js';
 import * as cmd from './commands.js';
 import * as auth from './auth.json';
+import * as commando from 'discord.js-commando';
 
-var bot: Client;
+var bot: commando.CommandoClient;
 
 init();
 
 function init() {
   let d = new Date();
   console.log(d + ' : Starting the bot!');
-  bot = new Client();
+  bot = new commando.CommandoClient();
+
+  bot.registry
+    .registerGroup('util', 'Utils')
+    .registerGroup('music','Music')
+    .registerDefaults()
+    .registerCommandsIn(__dirname + '/commands');
+
   bot.login(auth.token);
+
 }
 
 function destroy() {
@@ -52,7 +61,7 @@ bot.on('error', (e: Error) => {
   console.log(d.toString() + ' : Oh no an error!');
   console.log(e);
   destroy();
-  init();
+  process.exit(1);
 })
 
 bot.on('message', msg => {
@@ -62,36 +71,20 @@ bot.on('message', msg => {
   if (content.substring(0, 1) == '!') {
     let args = content.substring(1).split(' ');
     let req = args[0];
+    args.splice(0, 1);
 
     let d = new Date();
-    console.log(d.toString() + ' : ' + msg.member.user.username + ' - ' + req);
+    console.log(d.toString() + ' [' + msg.member.user.username + ']: ' + content);
 
-    args.splice(0, 1);
     switch (req) {
 
       case 'echo':
         msg.reply(args.join(' '));
         break;
 
-      case 'play':
-        cmd.playSound(msg, args.concat().toString());
-        break;
-
-      case 'join':
-        cmd.join(msg);
-        break;
-
-      case 'list':
-        cmd.listSounds(msg);
-        break;
-
-      case 'stop':
-      case 'leave':
-        cmd.leave(msg);
-        break;
 
       default:
-        msg.reply(':angry: Unrecognized command!');
+        // msg.reply(':angry: Unrecognized command!');
 
     }
   }
