@@ -32,20 +32,3 @@ export function playFile(member: GuildMember, filename: String) {
     })
     .catch(console.log);
 }
-
-
-/**
- * Joins the voice channel of user
- */
-export function join(msg: Message) {
-  if (msg.member.voiceChannel) {
-    msg.member.voiceChannel.join()
-      .then(() => {
-        msg.reply('Here I am!! :hugging:');
-      })
-      .catch(console.log);
-
-  } else {
-    msg.reply('I don\'t know where to go :cry:');
-  }
-}
