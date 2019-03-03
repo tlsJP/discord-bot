@@ -1,4 +1,8 @@
-FROM node:10
+FROM node:11
+
+# install ffmpeg
+RUN apt-get update
+RUN apt-get install -y ffmpeg
 
 # install dependencies
 COPY package.json package.json
