@@ -9,6 +9,7 @@ module.exports = class LeaveChannel extends Command {
       name: 'leave',
       group: 'util',
       memberName: 'leave',
+      aliases: ['stop'],
       description: 'Tells the bot to leave any voice channel it\'s in'
     });
   }
