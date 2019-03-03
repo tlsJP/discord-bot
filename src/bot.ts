@@ -1,27 +1,40 @@
 'use strict';
 
-import Discord = require('discord.js');
+import { Client, GuildMember } from 'discord.js';
 import * as cmd from './commands.js';
 import * as auth from './auth.json';
 
-console.log('starting!');
+var bot: Client;
 
-var bot = new Discord.Client();
+init();
 
-function channelChanged(oldMember: Discord.GuildMember, newMember: Discord.GuildMember) {
+function init() {
+  let d = new Date();
+  console.log(d + ' : Starting the bot!');
+  bot = new Client();
+  bot.login(auth.token);
+}
+
+function destroy() {
+  let d = new Date();
+  console.log(d + ' : Destroying the bot...');
+  bot.destroy();
+}
+
+function channelChanged(oldMember: GuildMember, newMember: GuildMember) {
   return (oldMember && oldMember.voiceChannel && oldMember.voiceChannel.name)
     && (newMember && newMember.voiceChannel && newMember.voiceChannel.name)
     && oldMember.voiceChannel.name != newMember.voiceChannel.name;
 }
 
-function firstChannel(oldMember: Discord.GuildMember, newMember: Discord.GuildMember) {
+function firstChannel(oldMember: GuildMember, newMember: GuildMember) {
   return oldMember.voiceChannel == null && newMember.voiceChannel != null;
 }
 
 /**
  * 'Welcome' people who join a voice channel
  */
-bot.on('voiceStateUpdate', (oldMember: Discord.GuildMember, newMember: Discord.GuildMember) => {
+bot.on('voiceStateUpdate', (oldMember: GuildMember, newMember: GuildMember) => {
 
   //only play welcome if the voice channel changed or if they were not previously in a voice channel
   if (channelChanged(oldMember, newMember) || firstChannel(oldMember, newMember)) {
@@ -30,9 +43,17 @@ bot.on('voiceStateUpdate', (oldMember: Discord.GuildMember, newMember: Discord.G
 
 });
 
-bot.on('ready', function () {
+bot.on('ready', () => {
   console.log('Logged in as %s', bot.user.username);
 });
+
+bot.on('error', (e: Error) => {
+  let d = new Date();
+  console.log(d.toString() + ' : Oh no an error!');
+  console.log(e);
+  destroy();
+  init();
+})
 
 bot.on('message', msg => {
 
@@ -42,7 +63,8 @@ bot.on('message', msg => {
     let args = content.substring(1).split(' ');
     let req = args[0];
 
-    console.log(msg.member.user.username + ' - ' + req);
+    let d = new Date();
+    console.log(d.toString() + ' : ' + msg.member.user.username + ' - ' + req);
 
     args.splice(0, 1);
     switch (req) {
@@ -75,5 +97,3 @@ bot.on('message', msg => {
   }
 
 });
-
-bot.login(auth.token);

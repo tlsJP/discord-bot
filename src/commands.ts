@@ -29,6 +29,11 @@ export function playFile(member: GuildMember, filename: String) {
     return;
   }
 
+  if(member==null || member.voiceChannel ==null) {
+    console.log('cant play file for a null member');
+    return;
+  }
+
   member.voiceChannel.join()
     .then(c => {
       soundPlaying = true;
@@ -43,8 +48,6 @@ export function playFile(member: GuildMember, filename: String) {
 export function listSounds(msg: Message) {
   console.log('list files');
   fs.readdir(WORKING_DIRECTORY, (err, files) => {
-    console.log('read the directory...');
-    console.log(files);
 
     if (err) {
       console.log(err);
@@ -57,11 +60,11 @@ export function listSounds(msg: Message) {
     let i = 0;
     files.forEach(f => {
       if (f.endsWith('.mp3') && i < 50) {
-        str += ' ' + f.replace('.mp3', '') + '\n';
+        str += '  ' + f.replace('.mp3', '') + '\n';
         i++;
       }
     })
-    console.log(str);
+
     msg.reply(str);
   })
 }
