@@ -31,9 +31,8 @@ module.exports = class Play extends Command {
           maxFileName = f.length - 3 > maxFileName ? f.length - 3 : maxFileName;
         })
 
-        let str = "\nMP3s\n\n";
+        let str = "```\nMP3s\n\n";
         str += "Usage : !play {sound}\n\n";
-        str += '`';
         str += "\nSounds:\n";
 
 
@@ -61,8 +60,9 @@ module.exports = class Play extends Command {
 
         }
 
+        console.log('str len : ' + str.length);
 
-        msg.reply(str + '`')
+        msg.reply(str + '```')
           .catch(err => {
             console.log(err);
             console.log(str.length);
