@@ -31,9 +31,8 @@ module.exports = class Play extends Command {
           maxFileName = f.length - 3 > maxFileName ? f.length - 3 : maxFileName;
         })
 
-        let str = "\nMP3s\n\n";
+        let str = "```\nMP3s\n\n";
         str += "Usage : !play {sound}\n\n";
-        str += '```';
         str += "\nSounds:\n";
 
 
