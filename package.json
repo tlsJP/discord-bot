@@ -21,13 +21,13 @@
   },
   "homepage": "https://github.com/tlsJP/discord-bot#readme",
   "dependencies": {
-    "@types/node": "^10.12.24",
+    "@types/node": "^10.14.12",
     "discord.js": "^11.5.1",
     "discord.js-commando": "^0.10.0",
     "eslint": "^5.16.0",
     "node-opus": "^0.3.2"
   },
   "devDependencies": {
-    "@typescript-eslint/parser": "^1.4.2"
+    "@typescript-eslint/parser": "^1.12.0"
   }
 }
