@@ -16,7 +16,7 @@ function init() {
 
   bot.registry
     .registerGroup('util', 'Utils')
-    .registerGroup('music','Music')
+    .registerGroup('music', 'Music')
     .registerDefaults()
     .registerCommandsIn(__dirname + '/commands');
 
@@ -84,7 +84,7 @@ bot.on('message', msg => {
 
 
       default:
-        // msg.reply(':angry: Unrecognized command!');
+      // msg.reply(':angry: Unrecognized command!');
 
     }
   }
