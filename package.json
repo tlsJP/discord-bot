@@ -25,7 +25,8 @@
     "discord.js": "^11.5.1",
     "discord.js-commando": "^0.10.0",
     "eslint": "^5.16.0",
-    "node-opus": "^0.3.2"
+    "node-opus": "^0.3.2",
+    "typescript": "^3.5.3"
   },
   "devDependencies": {
     "@typescript-eslint/parser": "^1.12.0"
