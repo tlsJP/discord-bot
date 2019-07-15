@@ -20,9 +20,8 @@ COPY tsconfig.json /bot/tsconfig.json
 # Compile
 RUN cd /bot && tsc
 
-# We could clean up by removing all assets except 
-# /bot/built 
-# /bot/node_modules
+# Cleanup
+RUN cd /bot && npm prune --production
 
 # start the bot
 CMD ["node", "/bot/built/bot.js"]
