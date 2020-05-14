@@ -26,9 +26,9 @@
     "node-opus": "^0.3.3"
   },
   "devDependencies": {
-    "@types/node": "^12.12.37",
+    "@types/node": "^12.12.39",
     "@typescript-eslint/parser": "^1.13.0",
     "eslint": "^5.16.0",
-    "typescript": "^3.8.3"
+    "typescript": "^3.9.2"
   }
 }
