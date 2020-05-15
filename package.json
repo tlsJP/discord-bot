@@ -21,9 +21,9 @@
   },
   "homepage": "https://github.com/tlsJP/discord-bot#readme",
   "dependencies": {
+    "@discordjs/opus": "^0.3.2",
     "discord.js": "^11.6.4",
-    "discord.js-commando": "^0.10.0",
-    "node-opus": "^0.3.3"
+    "discord.js-commando": "^0.10.0"
   },
   "devDependencies": {
     "@types/node": "^12.12.39",
