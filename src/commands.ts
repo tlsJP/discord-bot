@@ -12,7 +12,7 @@ const player = v.createAudioPlayer();
 /**
  * Play an mp3
  *
- * @param {Member} member - who it should be played for
+ * @param {VoiceState} voiceState - who it should be played for
  * @param {String} filename - name of file
  */
 export function playFile(voiceState: VoiceState, filename: String) {
@@ -39,16 +39,4 @@ export function playFile(voiceState: VoiceState, filename: String) {
   );
 
   player.play(resource);
-  // member.voi
-  //   .join()
-  //   .then((c) => {
-  //     soundPlaying = true;
-  //     const dispatcher = c.playFile(
-  //       WORKING_DIRECTORY + filename.toLowerCase() + ".mp3"
-  //     );
-  //     dispatcher.on("end", () => {
-  //       soundPlaying = false;
-  //     });
-  //   })
-  //   .catch(console.log);
 }
