@@ -10,6 +10,7 @@ var connection: v.VoiceConnection;
 const player = v.createAudioPlayer();
 
 /**
+ * @deprecated
  * Play an mp3
  *
  * @param {VoiceState} voiceState - who it should be played for

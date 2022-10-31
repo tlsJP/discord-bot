@@ -1,10 +1,14 @@
 "use strict";
 
 import { Client, Events, GatewayIntentBits, VoiceState } from "discord.js";
-import * as cmd from "./commands.js";
+import * as v from "@discordjs/voice";
+
 import * as auth from "./auth.json";
 
 const bot = new Client({ intents: [GatewayIntentBits.Guilds] });
+
+var connection: v.VoiceConnection;
+const player = v.createAudioPlayer();
 
 init();
 
@@ -55,7 +59,8 @@ bot.on(
       firstChannel(oldState, newState) ||
       channelChanged(oldState, newState)
     ) {
-      cmd.playFile(newState, "sup");
+      // cmd.playFile(newState, "sup");
+      // play when ppl join
     }
   }
 );
