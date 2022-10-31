@@ -1,6 +1,6 @@
 "use strict";
 
-import { Client, Events, GatewayIntentBits } from "discord.js";
+import { Client, Events, GatewayIntentBits, VoiceState } from "discord.js";
 import * as cmd from "./commands.js";
 import * as auth from "./auth.json";
 
@@ -25,34 +25,40 @@ function destroy() {
   bot.destroy();
 }
 
-function channelChanged(oldMember: GuildMember, newMember: GuildMember) {
-  return (
-    oldMember &&
-    oldMember.voiceChannel &&
-    oldMember.voiceChannel.name &&
-    newMember &&
-    newMember.voiceChannel &&
-    newMember.voiceChannel.name &&
-    oldMember.voiceChannel.name != newMember.voiceChannel.name
-  );
+/**
+ *
+ * @param oldState
+ * @param newState
+ * @returns
+ */
+function channelChanged(oldState: VoiceState, newState: VoiceState): Boolean {
+  let oldChannel = oldState?.channel?.name;
+  let newChannel = newState?.channel?.name;
+
+  return oldChannel === undefined || newChannel != oldChannel;
 }
 
-function firstChannel(oldMember: GuildMember, newMember: GuildMember) {
-  return oldMember.voiceChannel == null && newMember.voiceChannel != null;
+function firstChannel(oldState: VoiceState, newState: VoiceState) {
+  return oldState.channel == null && newState.channel != null;
 }
 
 /**
  * 'Welcome' people who join a voice channel
  */
-bot.on("voiceStateUpdate", (oldMember: GuildMember, newMember: GuildMember) => {
-  //only play welcome if the voice channel changed or if they were not previously in a voice channel
-  if (
-    channelChanged(oldMember, newMember) ||
-    firstChannel(oldMember, newMember)
-  ) {
-    cmd.playFile(newMember, "sup");
+bot.on(
+  Events.VoiceStateUpdate,
+  (oldState: VoiceState, newState: VoiceState) => {
+    oldState.channel.name;
+
+    //only play welcome if the voice channel changed or if they were not previously in a voice channel
+    if (
+      firstChannel(oldState, newState) ||
+      channelChanged(oldState, newState)
+    ) {
+      cmd.playFile(newState, "sup");
+    }
   }
-});
+);
 
 bot.on("ready", () => {
   console.log("Logged in as %s", bot.user.username);

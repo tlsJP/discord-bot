@@ -1,34 +1,54 @@
-'use strict';
+"use strict";
+import { VoiceState } from "discord.js";
+import * as v from "@discordjs/voice";
 
-import { Message, GuildMember } from "discord.js";
-import * as  fs from 'fs';
-
-const WORKING_DIRECTORY = '/mp3/'
+const WORKING_DIRECTORY = "/mp3/";
 var soundPlaying = false;
+
+var connection: v.VoiceConnection;
+
+const player = v.createAudioPlayer();
 
 /**
  * Play an mp3
- *  
+ *
  * @param {Member} member - who it should be played for
  * @param {String} filename - name of file
  */
-export function playFile(member: GuildMember, filename: String) {
+export function playFile(voiceState: VoiceState, filename: String) {
   if (soundPlaying) {
     return;
   }
 
-  if (member == null || member.voiceChannel == null) {
-    console.log('cant play file for a null member');
+  if (voiceState == null || voiceState.channel == null) {
+    console.log("cant play file for a null member");
     return;
   }
 
-  member.voiceChannel.join()
-    .then(c => {
-      soundPlaying = true;
-      const dispatcher = c.playFile(WORKING_DIRECTORY + filename.toLowerCase() + '.mp3');
-      dispatcher.on('end', () => {
-        soundPlaying = false;
-      })
-    })
-    .catch(console.log);
+  // Join a new channel if necessary
+  if (voiceState.channelId != connection?.joinConfig?.channelId) {
+    connection = v.joinVoiceChannel({
+      channelId: voiceState.channelId,
+      guildId: voiceState.channel.guildId,
+      adapterCreator: voiceState.guild.voiceAdapterCreator,
+    });
+  }
+
+  const resource = v.createAudioResource(
+    `${WORKING_DIRECTORY}${filename.toLowerCase()}.mp3`
+  );
+
+  player.play(resource);
+  // member.voi
+  //   .join()
+  //   .then((c) => {
+  //     soundPlaying = true;
+  //     const dispatcher = c.playFile(
+  //       WORKING_DIRECTORY + filename.toLowerCase() + ".mp3"
+  //     );
+  //     dispatcher.on("end", () => {
+  //       soundPlaying = false;
+  //     });
+  //   })
+  //   .catch(console.log);
 }
