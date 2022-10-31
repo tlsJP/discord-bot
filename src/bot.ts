@@ -60,38 +60,10 @@ bot.on(
   }
 );
 
-bot.on("ready", () => {
-  console.log("Logged in as %s", bot.user.username);
-});
-
-bot.on("error", (e: Error) => {
+bot.on(Events.Error, (e: Error) => {
   let d = new Date();
   console.log(d.toString() + " : Oh no an error!");
   console.log(e);
   destroy();
   process.exit(1);
-});
-
-bot.on("message", (msg) => {
-  let content = msg.content;
-
-  if (content.substring(0, 1) == "!") {
-    let args = content.substring(1).split(" ");
-    let req = args[0];
-    args.splice(0, 1);
-
-    let d = new Date();
-    console.log(
-      d.toString() + " [" + msg.member.user.username + "]: " + content
-    );
-
-    switch (req) {
-      case "echo":
-        msg.reply(args.join(" "));
-        break;
-
-      default:
-      // msg.reply(':angry: Unrecognized command!');
-    }
-  }
 });
