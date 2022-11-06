@@ -17,6 +17,8 @@ Messing around for the purpose of getting more acquainted with JS technologies
 
 ## Deploy
 
+Assumes a /mp3 folder exists
+
 1. Clone this repo to host
 2. Add your token to src/auth.json
 3. Invoke run.sh
