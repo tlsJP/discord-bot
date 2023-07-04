@@ -1,8 +1,8 @@
 {
-  "name": "discord-bot",
+  "name": "wednesday-bot",
   "version": "1.0.0",
-  "description": "discord bot",
-  "main": "bot.js",
+  "description": "wednesday bot",
+  "main": "src/bot.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
-    "eslint": "^8.16.0",
-    "typescript": "^5.1.6"
+    "eslint": "^8.16.0"
+    
   }
 }
