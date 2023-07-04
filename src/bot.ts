@@ -1,9 +1,10 @@
-"use strict";
+
 
 import { Client, Events, GatewayIntentBits, VoiceState } from "discord.js";
 import * as v from "@discordjs/voice";
 
-import * as auth from "./auth.json";
+
+import { token } from './auth.json';
 
 const bot = new Client({ intents: [GatewayIntentBits.Guilds] });
 
@@ -20,7 +21,7 @@ function init() {
     console.log(`Logged in as ${c.user.tag}`);
   });
 
-  bot.login(auth.token);
+  bot.login(token);
 }
 
 function destroy() {
