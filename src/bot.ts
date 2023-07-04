@@ -53,7 +53,7 @@ function firstChannel(oldState: VoiceState, newState: VoiceState) {
 bot.on(
   Events.VoiceStateUpdate,
   (oldState: VoiceState, newState: VoiceState) => {
-    oldState.channel.name;
+    // oldState.channel.name;
 
     //only play welcome if the voice channel changed or if they were not previously in a voice channel
     if (

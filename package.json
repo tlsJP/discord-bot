@@ -24,12 +24,10 @@
     "@discordjs/opus": "^0.9.0",
     "@discordjs/voice": "^0.16.0",
     "discord.js": "^14.11.0",
-    "discord.js-commando": "^0.12.3",
     "libsodium-wrappers": "^0.7.11"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
-    "@typescript-eslint/parser": "^5.13.0",
     "eslint": "^8.16.0",
     "typescript": "^5.1.6"
   }

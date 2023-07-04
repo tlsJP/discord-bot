@@ -28,11 +28,11 @@ export function playFile(voiceState: VoiceState, filename: String) {
 
   // Join a new channel if necessary
   if (voiceState.channelId != connection?.joinConfig?.channelId) {
-    connection = v.joinVoiceChannel({
-      channelId: voiceState.channelId,
-      guildId: voiceState.channel.guildId,
-      adapterCreator: voiceState.guild.voiceAdapterCreator,
-    });
+    // connection = v.joinVoiceChannel({
+    //   channelId: voiceState.channelId,
+    //   guildId: voiceState.channel.guildId,
+    //   adapterCreator: voiceState.guild.voiceAdapterCreator,
+    // });
   }
 
   const resource = v.createAudioResource(
